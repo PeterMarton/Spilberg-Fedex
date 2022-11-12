@@ -12,6 +12,7 @@ public class CucumberHooks {
 
     @Before
     public void beforeScenario(Scenario scenario) {
+
         ChromeDriverManager.setupDriver();
         scenario.log("### Testcase \"" + scenario
                 .getName()

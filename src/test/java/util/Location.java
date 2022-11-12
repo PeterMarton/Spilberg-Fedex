@@ -3,7 +3,8 @@ package util;
 public enum Location {
 
     GREENLAND("en-gl", ""),
-    ITALY("en-gl", "it-it"),
+    ITALY("en-it", "it-it"),
+    CHINA("en-cn", "zh-cn"),
     HUNGARY("en-hu", "hu-hu");
 
     private final String defaultLanguage;
@@ -13,7 +14,7 @@ public enum Location {
         this.defaultLanguage = language;
         this.extraLanguage = extraLanguage;
     }
-    public String getLanguage(String location, int position) {
+    public String getLanguage(int position) {
         return switch (position) {
             case 1 -> defaultLanguage;
             case 2 -> extraLanguage;

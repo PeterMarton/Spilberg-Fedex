@@ -1,9 +1,13 @@
 package util;
 
 public enum Page {
-    INDEX("https://www.fedex.com"),
-    HOME("https://www.fedex.com/%s/home.html"),
-    CHOOSE_LOCATION(INDEX.getUrl() + "/global/choose-location.html");
+    DOMAIN("https://www.fedex.com/"),
+    HOME(DOMAIN.getUrl() + "%s/home.html"),
+    FEDEX_TRACK(DOMAIN.getUrl() + "fedextrack/"),
+    FEDEX_TRACK_ERROR(DOMAIN.getUrl() + "fedextrack/system-error"),
+    LOGIN(DOMAIN.getUrl() + "secure-login/%s/#/login-credentials"),
+    LOCATION("https://local.fedex.com/en-us"),
+    CHOOSE_LOCATION(DOMAIN.getUrl() + "global/choose-location.html");
 
     private final String url;
 
@@ -14,5 +18,4 @@ public enum Page {
     public String getUrl() {
         return url;
     }
-
 }
