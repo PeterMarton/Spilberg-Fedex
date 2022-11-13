@@ -89,18 +89,26 @@ public class CommonSteps {
         ExplicitWait.waitUntilUrlLoaded(getDriver(), url);
     }
 
-    @Then("I see message {string}")
+    @Then("I see message {}")
     public void iSeeMessage(String message) {
         Assertions
                 .assertThat(message)
                 .isEqualTo(new TrackPage().getErrorMessage());
 
     }
-    @When("I search parcel with number {}")
+    @When("I search for parcel number {}")
     public void iSearchParcelWithNumber(String parcelNumber) {
-        new HomePage()
-                .openSearchField()
-                .searchForParcel(parcelNumber);
+        new HomePage().searchForParcelHeader(parcelNumber);
+    }
+
+    @When("I use home page search bar to find parcel number {}")
+    public void iSearchParcelWithHomeSearchString(String parcelNumber) {
+        new HomePage().searchForParcelSearchBar(parcelNumber);
+    }
+
+    @When("I open search field")
+    public void openSearchField() {
+        new HomePage().openSearchField();
     }
 
     @Then("I am on the {} page")
@@ -116,9 +124,9 @@ public class CommonSteps {
                 .getUrl(), locale));
     }
 
-    @When("I select international shipping")
-    public void selectInternationalShipping() {
-        new HomePage().clickInternationalShipping();
+    @When("I select shipping")
+    public void selectShipping() {
+        new HomePage().clickShipping();
     }
 
     @When("I select locations")
@@ -143,5 +151,16 @@ public class CommonSteps {
         Assertions
                 .assertThat(new HomePage().getSubmenuSize())
                 .isEqualTo(listSize);
+    }
+    @When("I click on Ask FedEx chat icon")
+
+    public void clickOnChatIcon() {
+
+        new HomePage().openChat();
+    }
+
+    @Then("Chat has been opened")
+    public void chatIsOpen() {
+        ExplicitWait.waitUntilVisible(getDriver(), new HomePage().getChatWindowElement());
     }
 }

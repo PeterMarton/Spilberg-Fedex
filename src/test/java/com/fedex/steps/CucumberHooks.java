@@ -8,8 +8,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CucumberHooks {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CucumberHooks.class);
-
     @Before
     public void beforeScenario(Scenario scenario) {
 

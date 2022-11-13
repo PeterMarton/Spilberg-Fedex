@@ -6,7 +6,7 @@ public enum Page {
     FEDEX_TRACK(DOMAIN.getUrl() + "fedextrack/"),
     FEDEX_TRACK_ERROR(DOMAIN.getUrl() + "fedextrack/system-error"),
     LOGIN(DOMAIN.getUrl() + "secure-login/%s/#/login-credentials"),
-    LOCATION("https://local.fedex.com/en-us"),
+    LOCATION("https://local.fedex.com/%s"),
     CHOOSE_LOCATION(DOMAIN.getUrl() + "global/choose-location.html");
 
     private final String url;

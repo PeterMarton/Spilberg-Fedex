@@ -1,5 +1,6 @@
 package util;
 
+import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,9 +27,13 @@ public class ExplicitWait {
     }
 
     public static WebElement waitUntilVisible(WebDriver driver, WebElement element) {
-        return getFluentWait(driver).ignoring(NoSuchElementException.class).until(ExpectedConditions.visibilityOf(element));
+        return getFluentWait(driver)
+                .ignoring(NoSuchElementException.class, ElementClickInterceptedException.class)
+                .until(ExpectedConditions.visibilityOf(element));
     }
     public static WebElement waitUntilClickable(WebDriver driver, WebElement element) {
-        return getFluentWait(driver).ignoring(NoSuchElementException.class).until(ExpectedConditions.elementToBeClickable(element));
+        return getFluentWait(driver)
+                .ignoring(NoSuchElementException.class)
+                .until(ExpectedConditions.elementToBeClickable(element));
     }
 }

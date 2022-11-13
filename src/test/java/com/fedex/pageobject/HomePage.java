@@ -1,18 +1,19 @@
 package com.fedex.pageobject;
 
 import com.fedex.ChromeDriverManager;
+import net.jodah.failsafe.Failsafe;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import util.ExplicitWait;
 import util.Page;
+import util.RetryPolicyConfig;
 
 import java.util.List;
 
 public class HomePage extends AbstractPageObject {
 
-    private static final WebDriver driver;
     @FindBy(className = "fxg-geo-locator__body")
     private WebElement geoLocator;
 
@@ -24,6 +25,12 @@ public class HomePage extends AbstractPageObject {
 
     @FindBy(id = "fxg-search-text")
     private WebElement searchTextField;
+
+    @FindBy(id = "trackingnumber")
+    private WebElement searchBarTextField;
+
+    @FindBy(id = "btnSingleTrack")
+    private WebElement trackButton;
 
     @FindBy(css = "div.fxg-dropdown.fxg-global-nav > div > div:nth-child(1) .link")
     private List<WebElement> submenuElements;
@@ -37,13 +44,14 @@ public class HomePage extends AbstractPageObject {
     @FindBy(xpath = "//*[text()='LOCATIONS ']")
     private WebElement location;
 
+    @FindBy(className = "va_icon")
+    private WebElement chatIcon;
+    @FindBy(css = "[class='nw_Popin shadow']")
+    private WebElement chatWindow;
+
     private final String dataCountryCode = "[data-analytics*='%s']";
 
-    static {
-        driver = ChromeDriverManager.getDriver();
-    }
-
-    @FindBy(className ="fxg-cookie-consent__actions")
+    @FindBy(className = "fxg-cookie-consent__actions")
     private WebElement cookieOption;
 
     public boolean isGeoLocatorDisplayed() {
@@ -70,12 +78,22 @@ public class HomePage extends AbstractPageObject {
         searchIcon.click();
         return this;
     }
-    public HomePage searchForParcel(String trackingNumber) {
+    public void searchForParcelHeader(String trackingNumber) {
         searchTextField.sendKeys(trackingNumber);
         searchTextField.submit();
-        return this;
     }
-    public void clickInternationalShipping() {
+
+    public void searchForParcelSearchBar(String trackingNumber) {
+        searchBarTextField.sendKeys(trackingNumber);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        trackButton.click();
+    }
+
+    public void clickShipping() {
         shippingDropdown.click();
     }
     public int getSubmenuSize() {
@@ -94,5 +112,19 @@ public class HomePage extends AbstractPageObject {
     }
     public WebElement cookieOption() {
         return cookieOption;
+    }
+
+    public void openChat() {
+
+        Failsafe
+                .with(RetryPolicyConfig.retryPolicy)
+                .run(() -> {
+                    ExplicitWait.waitUntilVisible(driver, chatIcon);
+                    chatIcon.click();
+                });
+    }
+
+    public WebElement getChatWindowElement() {
+        return chatWindow;
     }
 }
