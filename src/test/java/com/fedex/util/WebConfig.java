@@ -1,4 +1,4 @@
-package util;
+package com.fedex.util;
 
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;

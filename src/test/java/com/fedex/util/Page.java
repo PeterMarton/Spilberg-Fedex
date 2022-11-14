@@ -1,4 +1,4 @@
-package util;
+package com.fedex.util;
 
 public enum Page {
     DOMAIN("https://www.fedex.com/"),
