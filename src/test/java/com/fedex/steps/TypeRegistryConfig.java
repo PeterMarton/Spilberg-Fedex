@@ -1,7 +1,7 @@
 package com.fedex.steps;
 
 import io.cucumber.java.ParameterType;
-import util.NumberConverter;
+import com.fedex.util.NumberConverter;
 
 public class TypeRegistryConfig {
 

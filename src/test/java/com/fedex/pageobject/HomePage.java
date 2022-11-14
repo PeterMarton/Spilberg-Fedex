@@ -3,12 +3,11 @@ package com.fedex.pageobject;
 import com.fedex.ChromeDriverManager;
 import net.jodah.failsafe.Failsafe;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import util.ExplicitWait;
-import util.Page;
-import util.RetryPolicyConfig;
+import com.fedex.util.ExplicitWait;
+import com.fedex.util.Page;
+import com.fedex.util.RetryPolicyConfig;
 
 import java.util.List;
 

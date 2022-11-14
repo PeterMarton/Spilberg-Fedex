@@ -1,4 +1,4 @@
-package util;
+package com.fedex.util;
 
 import net.jodah.failsafe.RetryPolicy;
 import org.openqa.selenium.ElementNotInteractableException;

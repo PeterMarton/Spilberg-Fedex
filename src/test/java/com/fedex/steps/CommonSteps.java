@@ -9,10 +9,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebDriver;
-import util.ExplicitWait;
-import util.Location;
-import util.Page;
-import util.WebConfig;
+import com.fedex.util.ExplicitWait;
+import com.fedex.util.Location;
+import com.fedex.util.Page;
+import com.fedex.util.WebConfig;
 
 public class CommonSteps {
 
